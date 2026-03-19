@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int_actblue__01__donations
+    columns:
+      - name: "(lineitem_id || '-' || most_recent)"
+        data_tests:
+          - unique
+          - not_null
+  - name: int_actblue__02__donations
+    columns:
+      - name: lineitem_id
+        data_tests:
+          - unique
+          - not_null

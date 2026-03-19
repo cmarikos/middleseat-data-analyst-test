@@ -1,0 +1,12 @@
+middleseat_dbt:
+  outputs:
+    dev:
+      type: redshift
+      host: test
+      port: 0000
+      user: data_analyst_user
+      password: data_analyst_password
+      dbname: dev
+      schema: dbt_schema
+      threads: 1
+  target: dev

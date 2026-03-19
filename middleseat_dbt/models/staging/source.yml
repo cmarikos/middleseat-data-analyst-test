@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: actblue
+    schema: actblue_raw
+    tables:
+      - name: webhooks
+        description: "Webhook payloads from ActBlue: https://secure.actblue.com/docs/webhooks"
+
+  - name: auxiliary
+    description: 'Reference and lookup tables'
+    schema: auxiliary
+    tables:
+      - name: actblue_entities_to_client_code
+        description: "This is a crosswalk that maps ActBlue entity IDs to a wdl_client_code."
+      - name: auxiliary__source_categories_merged
+        description: "This is a lookup table that maps refcode-form_name combos to a human-created source type."
+      - name: auxiliary__finance_exclusions
+        description: 'This is a lookup table that flags large-dollar donations marked as "Finance" through a human-created process.'

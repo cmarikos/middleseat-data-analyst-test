@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: core__donations
+    columns:
+      - name: wdl_transaction_id
+        description: ""
+        data_tests:
+          - unique
+          - not_null
