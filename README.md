@@ -12,7 +12,9 @@ This repo contains my completed work for the Middle Seat Data Analyst technical 
 
 ## What I Did
 
-### Task 1 - Copy the [project Google sheet](https://docs.google.com/spreadsheets/d/1yoqaUQke6F_6_83maT2TXMFeJg3iktn0Naa30XAjHzs/edit?gid=1483213299#gid=1483213299) and the [project Data Studio](https://lookerstudio.google.com/reporting/7609085c-cbea-4551-8438-1d75d18a544e/page/p_co1trq1irc)
+### Task 1 - Copy the project resources
+- [Original project Google sheet](https://docs.google.com/spreadsheets/d/1yoqaUQke6F_6_83maT2TXMFeJg3iktn0Naa30XAjHzs/edit?gid=1483213299#gid=1483213299) 
+- [Original project Data Studio](https://lookerstudio.google.com/reporting/7609085c-cbea-4551-8438-1d75d18a544e/page/p_co1trq1irc)
 
 ---
 
