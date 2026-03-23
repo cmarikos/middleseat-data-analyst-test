@@ -56,7 +56,7 @@ Created `models/reporting/reporting__donations_donor_analytics.sql` — a new re
 
 ### Task 5 — Looker Studio Dashboard
 
-[Dashboard Link](https://lookerstudio.google.com/reporting/ec1efb2a-b444-44de-85f5-f527f910e095)
+[Dashboard Link](https://lookerstudio.google.com/s/qPNAB911Fds)
 
 My dashboard using the [project Google sheet](https://docs.google.com/spreadsheets/d/1ox_lWqmR0KXZzc7UDKVGWoC2rHtdcNGIqS_5sAUI-q4/edit?gid=1483213299#gid=1483213299) 
 
