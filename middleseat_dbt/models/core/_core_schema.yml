@@ -4,7 +4,88 @@ models:
   - name: core__donations
     columns:
       - name: wdl_transaction_id
-        description: ""
+        description: >-
+          Internal transaction ID across platforms which contains platform name, client ID,
+          and line item ID.
         data_tests:
           - unique
           - not_null
+      - name: wdl_client_code
+        description: >-
+          Internal code which identifies which client a transaction belongs to. A 'ZZZ' indicates
+          that the transaction is not associated with a known client. 
+        data_tests:
+          - not_null
+      - name: transaction_id
+        description: >-
+          Raw source platform transaction ID. This can be used to match specific transactions
+          within a selected platform.
+      - name: amount
+        description: "Donation amount by unique transaction."
+      - name: post_refund_amount
+        description: "Donation amount by unique transaction with any refunds accounted for."
+      - name: is_recurring
+        description: >-
+          Indicates if a donation is set up on a recurring schedule. True = recurring, and False = one-time gift.
+      - name: recurring_type
+        description: >-
+          Indicates this is a new recurring donation, and existing recurring donation, or a
+          one-time donation. 
+        data_tests:
+          - accepted_values:
+              arguments: 
+                values:
+                  - "New"
+                  - "Existing"
+                  - "One-time"
+              config:
+                where: "recurring_type is not null"
+      - name: recurring_gift_seq
+        description: >-
+          The sequence number of this donation within a recurring giving plan. 0 indicates
+          the first gift in the plan.
+      - name: recurring_period
+        description: "Indicates how often donations are set to reoccur."
+      - name: is_recurring_cancelled
+        description: >-
+          Indicates whether a recurring donation plan has been cancelled at the time of a given
+          transaction. Does not update retro-actively, check a donors most recent donation
+          for current recurring donation status.
+      - name: is_refunded
+        description: "Indicates whether a transaction was refunded. 1 = refunded, and 0 = not refunded."
+      - name: source_type
+        description: "Manually applied donation source channel."
+      - name: likely_source_type
+        description: "Inferred donation source channel."
+        data_tests:
+         - accepted_values:
+            arguments:
+              values:
+                - 'Email'
+                - 'Ads'
+                - 'Texting - P2P Rental'
+                - 'Texting - Owned P2P'
+                - 'Texting - Broadcast'
+                - 'Social'
+                - 'Website'
+                - 'ActBlue Donor Dashboard'
+                - 'Finance'
+            config:
+              where: "likely_source_type is not null"
+      - name: is_finance_exclusion
+        description: >-
+          Indicates whether this transaction was entered by the finance team and should be
+          excluded from digital fundraising reports. True = exclude from digital reporting,
+          False = include in digital reporting.
+      - name: ab_test_name
+        description: >-
+          The name of the A/B test this donation was part of, if applicable. A/B tests compare
+          two versions of a fundraising ask to see which performs better.
+      - name: ab_test_variation
+        description: "Which version of the A/B test the donor saw, such as 'control' or 'treatment'."
+      - name: refcode
+        description: >-
+          Platform specific code attached to the donation link that identifies where the donor came
+          from, such as an email, ad, or social post.
+      - name: form_name
+        description: "Name of ActBlue donation form."

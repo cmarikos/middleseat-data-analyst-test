@@ -1,7 +1,13 @@
+{# Unions ActBlue and Shopify data into a single standardized table #}
+
+{# Find all Shopify tables matching the patterns in get_precore_tables #}
 {%- set schema_pattern = 'dbt_%' -%}
 {%- set precore_table_name = 'precore_shopify__orders_v2' -%}
 {%- set shopify_tables = get_precore_tables(schema_pattern, precore_table_name, schema_exclude=['dbt_precore'], model_exclude=['precore_shopify__orders_v1']) -%}
+{#- Looks like an old precore shopify model is being excluded here -#}
 
+{# Redshift performance configs, optimizes joins and range queries on wdl_transaction_id #}
+{# See https://docs.getdbt.com/reference/resource-configs/redshift-configs for Redshift config docs #}
 {{
     config(
         dist='wdl_transaction_id',
@@ -11,7 +17,7 @@
 
 
 WITH
-
+    {#- Pull all ActBlue transactions from the precore ActBlue model into an ActBlue CTE -#}
     actblue AS (
         SELECT
             wdl_client_code,
@@ -63,7 +69,7 @@ WITH
             is_finance_exclusion
         FROM {{ ref('precore_actblue__donations') }}
     ),
-
+    {#- Unions all discovered Shopify precore tables into one dataset using get_precore_tables results -#}
     shopify_tables_unioned AS (
         {{ dbt_utils.union_relations(
                 shopify_tables,
@@ -72,6 +78,8 @@ WITH
         }}
     ),
 
+    {#- Pull all matching Shopify transactions into a Shopify CTE -#}
+    {#- Pads Shopify table columns with null values where fields from ActBlue tables don't exist in Shopify schema -#}
     shopify AS (
         SELECT
             wdl_client_code,
@@ -98,6 +106,7 @@ WITH
             state_code AS state,
             zip_code AS zip,
             country_code AS country,
+            {#- There are no recurring Shopify donations -#}
             FALSE AS is_recurring,
             'One-time' AS recurring_type,
             NULL AS utc_recurring_started_at,
@@ -122,6 +131,7 @@ WITH
         FROM shopify_tables_unioned
     ),
 
+    {#- Union Shopify and ActBlue donations together to have one standard donations table we can query from-#}
     unioned AS (
         SELECT * FROM actblue
         UNION ALL
