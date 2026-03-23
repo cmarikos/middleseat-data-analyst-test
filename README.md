@@ -6,7 +6,7 @@
 
 ## Overview
 
-This repo contains my completed work for the Middle Seat Data Analyst technical assessment. The project uses a dbt + Redshift stack to transform raw ActBlue and Shopify donation data into a standardized reporting layer for the Benito for President campaign.
+This repo contains my completed work for the Middle Seat Data Analyst technical assessment. The project uses a dbt + Redshift stack to transform raw ActBlue and Shopify donation data into a standardized reporting layer for the Benito for President campaign, and create an [updated Data Studio client dashboard](https://lookerstudio.google.com/s/qPNAB911Fds).
 
 ---
 
