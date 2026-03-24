@@ -90,4 +90,4 @@ My dashboard using the [project Google sheet](https://docs.google.com/spreadshee
 - Jinja comments (`{# #}`) are used in files with Jinja templating and (`{#- -#}`) is used when preserving whitespace is important; SQL comments (`--`) are used for inline notes within SQL bodies
 - Regardless of the outcome this was fun project and well put together test, thanks for giving me a whack at it
 
-![Thanks!]([def]: images/President.png)
+![Thanks!](images/President.png)
